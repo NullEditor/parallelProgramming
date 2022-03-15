@@ -3,32 +3,26 @@
 #include<sys/time.h>
 #include<unistd.h>
 using namespace std;
-
-int main()
-{
+const int n=1000;
 timeval tv_begin,tv_end;//record start and end time
-gettimeofday(&tv_begin,NULL);
-const int x = 100,y=100;//x,y present cols and rows
-double sum[x];
-double a[y];
-double b[y][x];
+int sum[n],a[n],b[n][n];
 
-int temp = 0;//base number
-for(int i = 0;i<x;i++){//initialize
-        for(int j=0;j<y;j++){
-        a[j] = ++temp%1000;
-        b[j][i] = temp++%1000;
-        }
+void init(int n){
+	for(int i=0;i<n;i++)
+		for(int j=0;j<n;j++){
+			a[j] = j;
+			b[i][j] = i+j;
+		}
 }
-//////////////////////////////////////////////////////////////////////////////
-const int howMany = 100;//howmany times will you test
-for(int ptime = howMany;ptime>0;ptime--){
-for(int i = 0; i < x; i++){
-        sum[i] = 0.0;
-        for(int j = 0; j < y; j++)
-                sum[i] += b[j][i] * a[j];
-        }
+
+int main(){
+	init(n);
+	gettimeofday(&tv_begin,NULL);
+		for(int i = 0; i < n; i++){
+			sum[i] = 0.0;
+			for(int j = 0; j < n; j++)
+				sum[i] += b[j][i] * a[j];
+				}
+	gettimeofday(&tv_end,NULL);
+	cout<<"time:"<<(tv_end.tv_usec - tv_begin.tv_usec)<<endl;
 }
-gettimeofday(&tv_end,NULL);
- cout<<"time:"<<tv_end.tv_usec - tv_begin.tv_usec<<endl;
- }
