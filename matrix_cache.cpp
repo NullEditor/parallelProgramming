@@ -18,11 +18,11 @@ void init(int n){
 int main(){
 	init(n);
 	gettimeofday(&tv_begin,NULL);
-		for(int i = 0; i < n; i++){
-			sum[i] = 0.0;
-			for(int j = 0; j < n; j++)
-				sum[i] += b[j][i] * a[j];
-				}
+		for(int i = 0; i < n; i++)
+ 			sum[i] = 0.0;
+		 for(int j = 0; j < n; j++)
+		 	for(int i = 0; i < n; i++)
+				 sum[i] += b[j][i] * a[j];
 	gettimeofday(&tv_end,NULL);
 	cout<<"time:"<<(tv_end.tv_usec - tv_begin.tv_usec)<<endl;
 }
